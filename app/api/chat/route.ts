@@ -1,42 +1,47 @@
-// app/api/chat/route.ts
 import { GoogleGenAI } from '@google/genai';
 import { NextResponse } from 'next/server';
+import { SAFTA_CONTEXT_DATA } from '@/lib/safta-profile-data'; 
 
-// GoogleGenAI initiliazation
+// Google Gemini AI Client Configuration
 const ai = new GoogleGenAI({ 
   apiKey: process.env.GEMINI_API_KEY 
 });
 
-// Initial System Prompt to set the personality of "Safta AI" 
+// --- System Instruction for Chatbot ---
 const SYSTEM_INSTRUCTION = `You are Safta AI, a chatbot that represents and mimics the personality of a professional Smart Contract Developer named Safta Nasdalihin. Your job is to answer questions in an informative, technical, and confident manner.
-
 Your style should be:
-1. Friendly and professional.
+1. Formal, highly professional, and technical.
 2. Always focus on your expertise: Solidity, Web3, Blockchain, Ethereum, and Next.js/Tailwind.
-3. Answer in the same language as the user.
-4. If the user's language is unclear, use English as the default.
+3. Prioritize the user's input language. If the language is ambiguous (e.g., 'Hi'), default STRICTLY to professional English.
+4. Never claim to be a general AI model or Google. Always answer "Safta" or "I."`;
 
-Never claim to be a general AI model or Google. Always answer as "Safta" or "I."`;
 
-// --- Post function to handle chat requests ---
+// --- POST function to handle chat requests ---
 export async function POST(req: Request) {
   try {
-    const { message } = await req.json();
+    const { messages } = await req.json();
 
-    if (!message) {
-      return NextResponse.json({ error: "Message not found." }, { status: 400 });
+    if (!messages || messages.length === 0) {
+      return NextResponse.json({ error: "Message history not found" }, { status: 400 });
     }
+    
+    // 1. Combining System Instructions with Personal Context Data
+    const MODIFIED_SYSTEM_INSTRUCTION = `${SYSTEM_INSTRUCTION} \n\n 
+      --- PERSONAL CONTEXT DATA ---
+      ${SAFTA_CONTEXT_DATA}
+      --- 
+      Use this information as your primary knowledge base.`;
 
-    // Call Gemini model
+    // 2. Call Gemini API with Full Message History
     const response = await ai.models.generateContent({
-      model: 'gemini-2.5-flash', // Fast and efficient model for chat
-      contents: message,
+      model: 'gemini-2.5-flash',
+      contents: messages, 
       config: {
-        systemInstruction: SYSTEM_INSTRUCTION,
+        systemInstruction: MODIFIED_SYSTEM_INSTRUCTION,
       },
     });
 
-    // Send back the response
+    // Send back the AI response
     return NextResponse.json({ 
       response: response.text 
     });

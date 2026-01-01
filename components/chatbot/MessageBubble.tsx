@@ -1,6 +1,7 @@
 // components/chatbot/MessageBubble.tsx
 
 import React from 'react';
+import ReactMarkdown from 'react-markdown';
 
 interface MessageProps {
   text: string;
@@ -19,7 +20,11 @@ export const MessageBubble: React.FC<MessageProps> = ({ text, sender }) => {
       <div 
         className={`max-w-xs md:max-w-md p-3 my-1 rounded-lg shadow-md ${bubbleClasses}`}
       >
-        <p className="whitespace-pre-wrap">{text}</p>
+        <div className="whitespace-pre-wrap">
+          <ReactMarkdown>
+            {text}
+          </ReactMarkdown>
+        </div>
       </div>
     </div>
   );
