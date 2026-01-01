@@ -9,6 +9,7 @@
     "lint": "eslint"
   },
   "dependencies": {
+    "@google/genai": "^1.30.0",
     "@hookform/resolvers": "^5.2.2",
     "cookies-next": "^6.1.1",
     "framer-motion": "^12.23.24",
@@ -18,6 +19,7 @@
     "react-dom": "19.2.0",
     "react-hook-form": "^7.66.0",
     "react-icons": "^5.5.0",
+    "react-markdown": "^10.1.0",
     "resend": "^6.4.2",
     "zod": "^4.1.12"
   },
@@ -27,6 +29,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "autoprefixer": "^10.4.22",
+    "baseline-browser-mapping": "^2.9.5",
     "eslint": "^9",
     "eslint-config-next": "16.0.3",
     "tailwindcss": "^4",
