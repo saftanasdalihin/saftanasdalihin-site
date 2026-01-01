@@ -1,5 +1,5 @@
 // components/sections/SkillsGrid.tsx
-import { SiSolidity, SiEthers } from 'react-icons/si';
+import { SiSolidity, SiEthers, SiNextdotjs, SiTailwindcss } from 'react-icons/si';
 import { FaHardHat } from 'react-icons/fa';
 
 // My core skills data
@@ -7,13 +7,12 @@ const SKILLS = [
   { name: 'Solidity', icon: SiSolidity, color: 'text-foreground/70' },
   { name: 'Hardhat', icon: FaHardHat, color: 'text-yellow-300' },
   { name: 'Ethers.js', icon: SiEthers, color: 'text-foreground/70' },
+  { name: 'Next.js', icon: SiNextdotjs, color: 'text-foreground' },
+  { name: 'Tailwind CSS', icon: SiTailwindcss, color: 'text-cyan-500' },
+  // { name: 'TypeScript', icon: SiTypescript, color: 'text-blue-600' },
   // { name: 'Contract Auditing', icon: FaShieldAlt, color: 'text-red-500' },
   // { name: 'EVM & Protocols', icon: SiEthereum, color: 'text-blue-800' },
-  // { name: 'TypeScript', icon: SiTypescript, color: 'text-blue-600' },
-  // { name: 'Next.js', icon: SiNextdotjs, color: 'text-foreground' },
-  // { name: 'Tailwind CSS / React', icon: SiTailwindcss, color: 'text-cyan-500' },
   // { name: 'PostgreSQL / Graph', icon: SiPostgresql, color: 'text-blue-500' },
-  // { name: 'JavaScript (ES6+)', icon: FaJs, color: 'text-yellow-500' },
 ];
 
 export const SkillsGrid = () => {

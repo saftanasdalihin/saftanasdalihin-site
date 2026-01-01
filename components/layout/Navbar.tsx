@@ -30,7 +30,7 @@ export const Navbar = () => {
     { href: '/about', label: 'About' },
     { href: '/projects', label: 'Projects' },
     { href: '/contact', label: 'Contact' },
-    { href: '/chat', label: "Chatbot AI" },
+    { href: '/chat', label: "Safta AI" },
   ];
 
   return (

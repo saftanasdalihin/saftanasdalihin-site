@@ -2,7 +2,7 @@
 "use client";
 
 import { ContactForm } from "@/components/sections/ContactForm";
-import { FaEnvelope, FaMapMarkerAlt, FaPhone } from "react-icons/fa";
+import { FaEnvelope, FaMapMarkerAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 const containerVariants: any = {
@@ -57,9 +57,6 @@ export default function ContactPage() {
         <div className="space-y-6 lg:col-span-1">
           <motion.div variants={itemVariants}>
             <ContactInfoItem icon={FaEnvelope} title="Email" value="saftanasdalihin@gmail.com" link="mailto:saftanasdalihin@gmail.com" />
-          </motion.div>
-          <motion.div variants={itemVariants}>
-            <ContactInfoItem icon={FaPhone} title="WhatsApp" value="+62 851-5667-8549" link="https://wa.me/6285156678549" />
           </motion.div>
           <motion.div variants={itemVariants}>
             <ContactInfoItem icon={FaMapMarkerAlt} title="Location" value="West Java, Indonesia" />
