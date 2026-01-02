@@ -74,7 +74,6 @@ export default function RootLayout({
     <html lang="en">
       <body className={inter.className}>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <div>
             <div className="flex flex-col min-h-screen"> 
               <Navbar />
               <main className="container mx-auto px-4 py-8 grow"> 
@@ -82,7 +81,6 @@ export default function RootLayout({
               </main>
               <Footer />
             </div>
-          </div>
         </ThemeProvider>
       </body>
     </html>
