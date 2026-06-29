@@ -6,9 +6,10 @@ import Link from 'next/link';
 import { SkillsGrid } from './SkillsGrid';
 // import { ExperienceTimeline } from './ExperienceTimeline';
 import { FaDownload } from 'react-icons/fa';
-import { motion,Variants } from 'framer-motion';
+import { motion } from 'framer-motion';
+import type { Variants } from 'framer-motion';
 
-const containerVariants: any = {
+const containerVariants: Variants = {
   hidden: { opacity: 0 },
   visible: {
     opacity: 1,
@@ -18,7 +19,7 @@ const containerVariants: any = {
   },
 };
 
-const itemVariants: any = {
+const itemVariants: Variants = {
   hidden: { y: 20, opacity: 0 },
   visible: {
     y: 0,
@@ -49,7 +50,7 @@ export const AboutSection = () => {
         {/* Text Coloum (Bio) */}
         <div className="lg:w-2/3">
           <p className="mb-4 text-lg text-foreground/80">
-            Hello! I'm Safta Nasdalihin, a dedicated <strong>Smart Contract Developer</strong> based in West Java, Indonesia. 
+            Hello! I&apos;m Safta Nasdalihin, a dedicated <strong>Smart Contract Developer</strong> based in Indonesia. 
             My career is focused on architecting and auditing secure, efficient, and transparent applications across various blockchain networks. 
             I specialize in turning complex concepts into robust, trustless code.
           </p>
