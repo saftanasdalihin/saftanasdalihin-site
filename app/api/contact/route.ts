@@ -4,7 +4,8 @@ import { Resend } from 'resend';
 import { contactFormSchema } from '@/lib/schemas'; // Import schemas validation
 
 // Resend Initialization (will reading from .env.local)
-const resend = new Resend(process.env.RESEND_API_KEY);
+const resendApiKey = process.env.RESEND_API_KEY?.trim();
+const resend = resendApiKey ? new Resend(resendApiKey) : null;
 
 // Email Target for receiving contact form messages
 const EMAIL_TARGET = 'saftanasdalihin@gmail.com'; 
@@ -30,6 +31,11 @@ export async function POST(request: Request) {
     }
 
     const { name, email, subject, message } = validationResult.data;
+
+    if (!resend) {
+      console.warn('RESEND_API_KEY is not configured. Skipping email delivery.');
+      return NextResponse.json({ message: 'Message received. Email delivery is currently unavailable.' });
+    }
 
     // 2. Sending email using Resend
     const { data, error } = await resend.emails.send({
