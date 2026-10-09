@@ -106,7 +106,7 @@ export const ChatInterface: React.FC = () => {
       >
         {messages.length === 0 && (
           <div className="text-center text-muted-foreground pt-10">
-            Hi! I&apos;m Safta AI. Feel free to ask about this website, my projects, or my expertise in Smart Contracts and Web3.
+            Hi! I&apos;m Safta AI, an AI assistant representing Safta&apos;s portfolio. Ask about his background or projects; I can inspect repository information from GitHub when relevant.
           </div>
         )}
 
@@ -121,7 +121,7 @@ export const ChatInterface: React.FC = () => {
         {isLoading && (
           <div className="flex justify-start">
             <div className="bg-muted p-3 my-1 rounded-lg rounded-tl-none animate-pulse">
-              Safta AI is thinking...
+              Checking relevant project information and preparing an answer...
             </div>
           </div>
         )}
@@ -140,7 +140,7 @@ export const ChatInterface: React.FC = () => {
               handleSubmit(e as unknown as FormEvent);
             }
           }}
-          placeholder={isLoading ? "Processing..." : "Type your message..."}
+          placeholder={isLoading ? "Checking project information..." : "Ask about Safta or his projects..."}
           disabled={isLoading}
           className="grow p-3 border border-input rounded-md focus:outline-none focus:ring-2 focus:ring-primary disabled:cursor-not-allowed resize-none overflow-y-auto"
         />

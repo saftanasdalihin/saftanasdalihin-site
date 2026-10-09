@@ -5,7 +5,7 @@ import { Metadata } from 'next';
 
 export const metadata: Metadata = {
   title: "Chat with Safta AI | Smart Contract Developer",
-  description: "Live interaction with AI that represents Safta Nasdalihin's experience and expertise in the fields of Smart Contracts and Web3.",
+  description: "Chat with an AI assistant representing Safta Nasdalihin's portfolio, with live GitHub-backed project information.",
 };
 
 export default function ChatPage() {
@@ -15,7 +15,7 @@ export default function ChatPage() {
         Talk with <span className="text-primary">Safta AI</span>
       </h1>
       <p className="text-muted-foreground mb-8 text-center max-w-lg">
-        Ask about this website, my projects, my background, or my expertise in Smart Contracts and Web3.
+        Ask about Safta&apos;s background and projects, or request evidence-backed details from his GitHub repositories.
       </p>
       <div className="w-full max-w-3xl grow h-[75vh]">
         <ChatInterface />
