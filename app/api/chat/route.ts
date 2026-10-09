@@ -75,17 +75,16 @@ async function callGemini(
   throw new Error("Gemini request failed after retry attempts.");
 }
 
-async function generateResponse(
+async function prepareProjectConversation(
   messages: ChatMessage[],
   systemInstruction: string
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-): Promise<any> {
+): Promise<unknown[]> {
   const contents: unknown[] = [...messages];
   let response = await callGemini(contents, systemInstruction, true);
 
   for (let round = 0; round < MAX_TOOL_ROUNDS; round++) {
     const calls = response.functionCalls ?? [];
-    if (calls.length === 0) return response;
+    if (calls.length === 0) return contents;
 
     const modelContent = response.candidates?.[0]?.content;
     if (modelContent) {
@@ -129,11 +128,13 @@ async function generateResponse(
     response = await callGemini(contents, systemInstruction, true);
   }
 
-  return callGemini(contents, systemInstruction, false);
+  // The final stream gets one bounded attempt to answer from the evidence gathered so far.
+  // Tools are disabled during streaming so the response cannot enter an unbounded tool loop.
+  return contents;
 }
 
 const PROJECT_QUERY_PATTERN =
-  /\b(github|repos?itor(?:y|ies)?|commit|source(?: code)?|file path|mini\s?dao|classfund|surachain|ethicforge|erc-?20|solidity project|portfolio projects?|compare (?:the )?projects?|test status|foundry tests?)\b/i;
+  /\b(github|repos?itor(?:y|ies)?|commit|source(?: code)?|file path|mini\s?dao|classfund|surachain|ethicforge|erc-?20|solidity project|portfolio projects?|projects?|proyek|kontrak pintar|compare (?:the )?projects?|test status|foundry tests?)\b/i;
 
 function textStreamHeaders(): HeadersInit {
   return {
@@ -144,35 +145,12 @@ function textStreamHeaders(): HeadersInit {
   };
 }
 
-// Project-tool calls need their evidence before the assistant can write a grounded answer.
-// Stream that completed answer in small chunks so the chat UI can render it progressively.
-function progressiveTextResponse(text: string): Response {
-  const encoder = new TextEncoder();
-  const characters = Array.from(text);
-  const body = new ReadableStream<Uint8Array>({
-    async start(controller) {
-      try {
-        const chunkSize = 18;
-        for (let index = 0; index < characters.length; index += chunkSize) {
-          controller.enqueue(encoder.encode(characters.slice(index, index + chunkSize).join("")));
-          await sleep(14);
-        }
-        controller.close();
-      } catch (error) {
-        controller.error(error);
-      }
-    },
-  });
-
-  return new Response(body, { headers: textStreamHeaders() });
-}
-
-// Non-project questions stream directly from Gemini, reducing time to first token.
 async function geminiTextStream(
-  messages: ChatMessage[],
+  contents: unknown[],
   systemInstruction: string
 ): Promise<Response | NextResponse> {
-  let responseStream: AsyncGenerator<{ text?: string | undefined }>;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  let responseStream: AsyncGenerator<any>;
 
   try {
     let created = false;
@@ -180,7 +158,7 @@ async function geminiTextStream(
       try {
         responseStream = await ai.models.generateContentStream({
           model: MODEL,
-          contents: messages as never[],
+          contents: contents as never[],
           config: { systemInstruction },
         });
         created = true;
@@ -283,10 +261,13 @@ export async function POST(request: Request) {
 
     if (PROJECT_QUERY_PATTERN.test(latestPrompt)) {
       try {
-        const response = await generateResponse(conversation, systemInstruction);
-        return progressiveTextResponse(response.text ?? "I couldn't generate a response. Please try again.");
+        const evidenceBackedConversation = await prepareProjectConversation(
+          conversation,
+          systemInstruction
+        );
+        return await geminiTextStream(evidenceBackedConversation, systemInstruction);
       } catch (error) {
-        console.error("Error generating GitHub-grounded response:", error);
+        console.error("Error gathering GitHub project evidence:", error);
         return NextResponse.json(
           { error: "Safta AI couldn't retrieve project information. Please try again." },
           { status: 502 }
