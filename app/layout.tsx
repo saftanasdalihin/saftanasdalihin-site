@@ -20,7 +20,7 @@ const spaceGrotesk = Space_Grotesk({
 
 export const metadata: Metadata = {
   title: "Safta Nas | Smart Contract Developer",
-  description: "Safta Nasdalihin's professional portfolio, a Smart Contract Developer specializing in secure and audited Solidity development across various blockchain platforms.",
+  description: "Portfolio of Safta Nasdalihin, a self-taught Smart Contract Developer focused on Solidity, EVM systems, protocol design, testing, and security-minded development.",
   alternates: {
     canonical: 'https://saftanasdalihin-site.vercel.app/',
   },
