@@ -20,18 +20,29 @@ export function ProjectCard({ project }: ProjectCardProps) {
         whileHover={{ scale: 1.05 }}
         whileTap={{ scale: 0.95 }}
       >
-        {/* Konten Card di dalam <article> */}
-        {project.thumbnail && (
+        {/* Replace the placeholder by setting the thumbnail path in lib/data.ts. */}
+        {project.thumbnail ? (
           <Image
             src={project.thumbnail}
             alt={project.title}
             width={800}
             height={450}
-            className="w-full h-48 object-cover"
+            className="h-48 w-full object-cover"
           />
+        ) : (
+          <div className="flex h-48 w-full items-center justify-center border-b border-dashed border-border bg-secondary/30 px-6 text-center text-sm text-muted-foreground">
+            <span>Thumbnail placeholder<br />Replace the path in lib/data.ts</span>
+          </div>
         )}
         <div className="p-4">
-          <h3 className="text-lg font-semibold">{project.title}</h3>
+          <div className="flex flex-wrap items-start justify-between gap-2">
+            <h3 className="text-lg font-semibold">{project.title}</h3>
+            {project.status && (
+              <span className="rounded-full border border-border bg-secondary px-2.5 py-1 text-xs font-medium text-secondary-foreground">
+                {project.status}
+              </span>
+            )}
+          </div>
           <p className="text-foreground/70 text-sm mb-4 h-16 line-clamp-3 overflow-hidden">
             {project.shortDescription}
           </p>

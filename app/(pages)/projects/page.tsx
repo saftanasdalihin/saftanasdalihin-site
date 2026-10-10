@@ -44,8 +44,7 @@ export default function ProjectsPage() {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.15, ease: [0.42, 0, 0.58, 1] }} 
       >
-        Explore my work focused on decentralized infrastructure. 
-        Every project demonstrates secure code, robust protocol design, and an outstanding user experience for the DApp frontend.
+        Explore my smart contract and Web3 work, including experiments and projects that are still in development.
       </motion.p>
       <motion.div 
         className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3"
