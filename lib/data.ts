@@ -9,7 +9,7 @@ export const PROJECTS_DATA: DetailedProject[] = [
     title: "MiniDAO Treasury — Community Governance & Treasury",
     shortDescription:
       "A work-in-progress Solidity protocol exploring community proposals, token-weighted voting, governed ETH treasury execution, and Merkle-based airdrop distribution.",
-    thumbnail: "",
+    thumbnail: "/images/projects/minidao.png",
     status: "In Development",
     tags: [
       "Solidity",
@@ -38,7 +38,7 @@ export const PROJECTS_DATA: DetailedProject[] = [
       "Merkle-proof-based airdrop claims with duplicate-claim prevention",
       "Foundry test suites for governance, treasury, and airdrop components",
     ],
-    galleryImages: [],
+    galleryImages: ["/images/projects/minidao.png"],
   },
 
   {
