@@ -143,7 +143,6 @@ export const PROJECTS_DATA: DetailedProject[] = [
     ],
     galleryImages: ["/images/projects/erc20.png"],
   },
-];
 
   {
     slug: "minidao-treasury",
@@ -181,6 +180,7 @@ export const PROJECTS_DATA: DetailedProject[] = [
     ],
     galleryImages: [],
   },
+];
 
 // Helper function to fetch data by slug
 export function getProjectBySlug(slug: string): DetailedProject | undefined {
