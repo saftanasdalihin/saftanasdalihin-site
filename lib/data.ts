@@ -5,6 +5,43 @@ export type { DetailedProject } from "./types";
 // Detailed project data
 export const PROJECTS_DATA: DetailedProject[] = [
   {
+    slug: "minidao-treasury",
+    title: "MiniDAO Treasury — Community Governance & Treasury",
+    shortDescription:
+      "A work-in-progress Solidity protocol exploring community proposals, token-weighted voting, governed ETH treasury execution, and Merkle-based airdrop distribution.",
+    thumbnail: "",
+    status: "In Development",
+    tags: [
+      "Solidity",
+      "Foundry",
+      "OpenZeppelin",
+      "DAO Governance",
+      "Treasury",
+      "ERC-20",
+      "Merkle Proofs",
+    ],
+    liveUrl: "",
+    githubUrl: "https://github.com/saftanasdalihin/minidao-treasury",
+    fullDescription:
+      "MiniDAO Treasury is an in-progress modular governance and treasury-management protocol. Its current design separates the governance token, proposal and voting engine, ETH treasury, and Merkle-proof airdrop mechanism into distinct contracts. The goal is to explore how community proposals can authorize treasury actions transparently. The architecture and implementation are still evolving, and the project has not been presented as audited or production-ready.",
+    role:
+      "Independent Smart Contract Developer: building the protocol in Solidity with Foundry, exploring contract boundaries, governance rules, treasury permissions, and test coverage.",
+    challenge:
+      "The central challenge is aligning proposal creation, voting power, quorum, execution, and treasury authorization so that funds can only move through the intended governance process. The design also needs to account for risks that can arise when voting power is based on current token balances.",
+    solution:
+      "The project separates responsibilities across GovernanceToken, Governor, Treasury, and MerkleAirdrop contracts. The Governor coordinates proposals and voting, Treasury is designed to accept ETH and restrict withdrawals to the authorized Governor, and the airdrop contract verifies Merkle proofs for eligible claims. Details may change as implementation and testing continue.",
+    keyFeatures: [
+      "Governance-token-based proposal eligibility and voting",
+      "Proposal vote tallying and quorum checks",
+      "Governor-controlled ETH treasury withdrawals",
+      "ERC-20 governance token using OpenZeppelin extensions",
+      "Merkle-proof-based airdrop claims with duplicate-claim prevention",
+      "Foundry test suites for governance, treasury, and airdrop components",
+    ],
+    galleryImages: [],
+  },
+
+  {
     slug: "ethicforge",
     title: "EthicForge — Modular Smart Contract Factory",
     shortDescription:
@@ -144,42 +181,7 @@ export const PROJECTS_DATA: DetailedProject[] = [
     galleryImages: ["/images/projects/erc20.png"],
   },
 
-  {
-    slug: "minidao-treasury",
-    title: "MiniDAO Treasury — Community Governance & Treasury",
-    shortDescription:
-      "A work-in-progress Solidity protocol exploring community proposals, token-weighted voting, governed ETH treasury execution, and Merkle-based airdrop distribution.",
-    thumbnail: "",
-    status: "In Development",
-    tags: [
-      "Solidity",
-      "Foundry",
-      "OpenZeppelin",
-      "DAO Governance",
-      "Treasury",
-      "ERC-20",
-      "Merkle Proofs",
-    ],
-    liveUrl: "",
-    githubUrl: "https://github.com/saftanasdalihin/minidao-treasury",
-    fullDescription:
-      "MiniDAO Treasury is an in-progress modular governance and treasury-management protocol. Its current design separates the governance token, proposal and voting engine, ETH treasury, and Merkle-proof airdrop mechanism into distinct contracts. The goal is to explore how community proposals can authorize treasury actions transparently. The architecture and implementation are still evolving, and the project has not been presented as audited or production-ready.",
-    role:
-      "Independent Smart Contract Developer: building the protocol in Solidity with Foundry, exploring contract boundaries, governance rules, treasury permissions, and test coverage.",
-    challenge:
-      "The central challenge is aligning proposal creation, voting power, quorum, execution, and treasury authorization so that funds can only move through the intended governance process. The design also needs to account for risks that can arise when voting power is based on current token balances.",
-    solution:
-      "The project separates responsibilities across GovernanceToken, Governor, Treasury, and MerkleAirdrop contracts. The Governor coordinates proposals and voting, Treasury is designed to accept ETH and restrict withdrawals to the authorized Governor, and the airdrop contract verifies Merkle proofs for eligible claims. Details may change as implementation and testing continue.",
-    keyFeatures: [
-      "Governance-token-based proposal eligibility and voting",
-      "Proposal vote tallying and quorum checks",
-      "Governor-controlled ETH treasury withdrawals",
-      "ERC-20 governance token using OpenZeppelin extensions",
-      "Merkle-proof-based airdrop claims with duplicate-claim prevention",
-      "Foundry test suites for governance, treasury, and airdrop components",
-    ],
-    galleryImages: [],
-  },
+
 ];
 
 // Helper function to fetch data by slug
