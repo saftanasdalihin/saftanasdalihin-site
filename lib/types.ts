@@ -7,6 +7,7 @@ export type Project = {
   tags: string[];
   liveUrl?: string;
   githubUrl?: string;
+  status?: string;
 };
 
 // Detailed page type

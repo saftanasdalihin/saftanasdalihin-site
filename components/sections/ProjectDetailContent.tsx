@@ -45,17 +45,29 @@ export const ProjectDetailContent = ({ project }: ProjectDetailContentProps) => 
             <motion.header variants={sectionItem} className="mb-10 text-center">
                 <h1 className="text-4xl font-extrabold md:text-5xl text-primary">{project.title}</h1>
                 <p className="mt-2 text-xl text-foreground/70">{project.shortDescription}</p>
+                {project.status && (
+                    <span className="mt-4 inline-flex rounded-full border border-border bg-secondary px-3 py-1 text-sm font-medium text-secondary-foreground">
+                        {project.status}
+                    </span>
+                )}
             </motion.header>
 
-            {/* Image / Thumbnail */}
-            <motion.div variants={sectionItem} className="relative h-96 w-full overflow-hidden rounded-xl shadow-2xl mb-12">
-                <Image
-                    src={project.thumbnail}
-                    alt={`Thumbnail proyek ${project.title}`}
-                    layout="fill"
-                    objectFit="cover"
-                    priority
-                />
+            {/* Add a thumbnail path in lib/data.ts when project artwork is ready. */}
+            <motion.div variants={sectionItem} className="relative mb-12 h-96 w-full overflow-hidden rounded-xl border border-border shadow-sm">
+                {project.thumbnail ? (
+                    <Image
+                        src={project.thumbnail}
+                        alt={`Thumbnail proyek ${project.title}`}
+                        fill
+                        className="object-cover"
+                        priority
+                    />
+                ) : (
+                    <div className="flex h-full w-full flex-col items-center justify-center gap-2 bg-secondary/30 px-6 text-center text-muted-foreground">
+                        <span className="text-lg font-semibold">Thumbnail placeholder</span>
+                        <span className="text-sm">Replace the thumbnail path in lib/data.ts</span>
+                    </div>
+                )}
             </motion.div>
 
             {/* Link dan Tags */}
