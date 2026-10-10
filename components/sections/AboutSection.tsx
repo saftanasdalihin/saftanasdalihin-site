@@ -80,13 +80,14 @@ export const AboutSection = () => {
             >
               Start a Project
             </Link>
-             <a
-              href="/Safta-Nasdalihin-CV.pdf"
-              download
+            <a
+              href="https://drive.google.com/drive/folders/1noXxa3RJNvuzB8wMzUxXriDWz41kpNjc"
+              target="_blank"
+              rel="noopener noreferrer"
               className="flex items-center gap-2 rounded-md border border-border bg-secondary 
                          px-6 py-3 font-semibold text-secondary-foreground 
                          transition-transform hover:scale-[1.03] active:scale-95"
-                >
+            >
               <FaDownload /> Download My CV
             </a>
             </motion.div>
